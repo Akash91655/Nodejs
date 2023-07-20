@@ -1,8 +1,26 @@
-# Create a server , run it on port 4000 and console log your name.
+# Request / Response on port 3000
 
 
-var http = require('http')
+const http = require('http');
 
-http.createServer(function(req, res){
-    res.end("Akash Kumar")
-}).listen(4000)
+const server = http.createServer((req, res) => {
+  const url = req.url;
+  if (url === '/home') {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Welcome home');
+  } else if (url === '/about') {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Welcome to About Us page');
+  } else if (url === '/node') {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Welcome to my Node Js project');
+  } else {
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('Page not found');
+  }
+});
+
+const port = 3000;
+server.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
